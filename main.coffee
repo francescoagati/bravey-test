@@ -7,7 +7,11 @@ add_doc = (nlp,doc,intent) -> nlp.addDocument doc,intent,
   fromTaggedSentence: true
   expandIntent: true
 
-nlp = new (Bravey.Nlp.Sequential)('getdescription', stemmer: Bravey.Language.IT.Stemmer)
+seq = (name) -> new (Bravey.Nlp.Sequential)(seq, stemmer: Bravey.Language.IT.Stemmer)
+
+log = (it) -> console.log it 
+
+nlp = seq 'getdescription'
 nlp.addEntity free_text 'topping'
 food = string 'food'
 food.addMatch 'pasta', 'pasta'
@@ -17,8 +21,8 @@ nlp.addEntity food
 add_doc nlp, 'I want {food}', 'food'
 add_doc nlp, '{topping}', 'food', 'food'
 
-console.log nlp.test('Want few pizzas, please')
-console.log nlp.test('I\'d like some pasta')
-console.log nlp.test('I\'d like some pasta with meatballs and cheese')
-console.log nlp.test('I\'d like some pasta with meatballs and cheese on top')
-console.log nlp.test('I\'d like some pasta having meatballs and cheese on top please')
+log nlp.test('Want few pizzas, please')
+log nlp.test('I\'d like some pasta')
+log nlp.test('I\'d like some pasta with meatballs and cheese')
+log nlp.test('I\'d like some pasta with meatballs and cheese on top')
+log nlp.test('I\'d like some pasta having meatballs and cheese on top please')
